@@ -20,11 +20,8 @@ import {
 const Navbar = () => (
   <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-100">
     <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-      <div className="flex items-center gap-2">
-        <div className="w-8 h-8 bg-asego-blue rounded-lg flex items-center justify-center">
-          <span className="text-white font-bold text-xl leading-none">A</span>
-        </div>
-        <span className="text-2xl font-bold font-display tracking-tight text-asego-dark">ASEGO</span>
+      <div className="flex items-center">
+        <img src="/assets/logo.png" alt="ASEGO Logo" className="h-10 w-auto" />
       </div>
       <div className="hidden md:flex items-center gap-8 text-asego-grey font-medium">
         <a href="#problema" className="hover:text-asego-blue transition-colors">Problema</a>
@@ -431,11 +428,8 @@ const App: React.FC = () => {
       {/* Footer */}
       <footer className="py-12 border-t border-slate-100 bg-white">
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-asego-blue rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-xl leading-none">A</span>
-            </div>
-            <span className="text-2xl font-bold font-display tracking-tight text-asego-dark">ASEGO</span>
+          <div className="flex items-center">
+            <img src="/assets/logo.png" alt="ASEGO Logo" className="h-10 w-auto" />
           </div>
           <p className="text-asego-grey text-sm">
             © {new Date().getFullYear()} ASEGO. Todos los derechos reservados.
