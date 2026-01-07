@@ -1,14 +1,14 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  MessageCircle, 
-  Clock, 
-  FileText, 
-  ShieldCheck, 
-  ArrowRight, 
-  LayoutDashboard, 
-  CheckCircle2, 
+import {
+  MessageCircle,
+  Clock,
+  FileText,
+  ShieldCheck,
+  ArrowRight,
+  LayoutDashboard,
+  CheckCircle2,
   AlertCircle,
   TrendingUp,
   Zap,
@@ -27,7 +27,7 @@ const Navbar = () => (
         <a href="#problema" className="hover:text-asego-blue transition-colors">Problema</a>
         <a href="#solucion" className="hover:text-asego-blue transition-colors">Solución</a>
         <a href="#beneficios" className="hover:text-asego-blue transition-colors">Beneficios</a>
-        <a 
+        <a
           href="tel:3815709287"
           className="bg-asego-blue text-white px-6 py-2.5 rounded-full font-semibold hover:bg-blue-700 transition-all shadow-lg shadow-blue-500/20"
         >
@@ -67,7 +67,7 @@ const ChatSimulation = () => {
           <p className="text-asego-green text-xs font-medium">En línea</p>
         </div>
       </div>
-      
+
       <div className="flex-1 space-y-4 overflow-y-auto px-2 py-4 no-scrollbar">
         <AnimatePresence>
           {messages.slice(0, visibleMessages).map((msg, i) => (
@@ -77,13 +77,12 @@ const ChatSimulation = () => {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               className={`flex ${msg.type === 'user' ? 'justify-end' : 'justify-start'}`}
             >
-              <div className={`max-w-[80%] rounded-2xl p-3 text-sm ${
-                msg.type === 'user' 
-                  ? 'bg-asego-blue text-white rounded-tr-none' 
-                  : msg.type === 'file' 
+              <div className={`max-w-[80%] rounded-2xl p-3 text-sm ${msg.type === 'user'
+                  ? 'bg-asego-blue text-white rounded-tr-none'
+                  : msg.type === 'file'
                     ? 'bg-slate-100 text-asego-dark border border-slate-200 flex items-center gap-3'
                     : 'bg-slate-100 text-asego-dark rounded-tl-none'
-              }`}>
+                }`}>
                 {msg.type === 'file' && <FileText className="text-asego-blue shrink-0" size={18} />}
                 <div>
                   <p>{msg.text}</p>
@@ -94,7 +93,7 @@ const ChatSimulation = () => {
           ))}
         </AnimatePresence>
       </div>
-      
+
       <div className="bg-slate-50 border-t border-slate-100 -mx-4 -mb-4 p-4 flex gap-2">
         <div className="flex-1 h-10 bg-white border border-slate-200 rounded-full"></div>
         <div className="w-10 h-10 bg-asego-blue rounded-full flex items-center justify-center">
@@ -118,7 +117,7 @@ interface CardProps {
 }
 
 const Card: React.FC<CardProps> = ({ children, className = "" }) => (
-  <motion.div 
+  <motion.div
     initial={{ opacity: 0, y: 20 }}
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true }}
@@ -130,7 +129,13 @@ const Card: React.FC<CardProps> = ({ children, className = "" }) => (
 
 const App: React.FC = () => {
   return (
-    <div className="min-h-screen selection:bg-asego-blue/10 selection:text-asego-blue">
+    <div className="min-h-screen selection:bg-asego-blue/10 selection:text-asego-blue relative">
+      {/* Background Decor */}
+      <div className="fixed inset-0 -z-10 h-full w-full bg-white">
+        <div className="absolute bottom-0 left-0 right-0 top-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:14px_24px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_110%)]">
+        </div>
+      </div>
+
       <Navbar />
 
       {/* Hero Section */}
@@ -152,13 +157,13 @@ const App: React.FC = () => {
               El asistente digital que responde a tus clientes, envía pólizas y avisa vencimientos de forma automática.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <a 
+              <a
                 href="tel:3815709287"
                 className="bg-asego-blue text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-blue-700 transition-all flex items-center justify-center gap-2 shadow-xl shadow-blue-500/20"
               >
                 Ver cómo funciona <ArrowRight size={20} />
               </a>
-              <a 
+              <a
                 href="tel:3815709287"
                 className="bg-white text-asego-dark border border-slate-200 px-8 py-4 rounded-full font-bold text-lg hover:bg-slate-50 transition-all text-center"
               >
@@ -175,7 +180,7 @@ const App: React.FC = () => {
           >
             <div className="absolute -top-12 -right-12 w-64 h-64 bg-asego-green/10 rounded-full blur-3xl -z-10"></div>
             <div className="absolute -bottom-12 -left-12 w-64 h-64 bg-asego-blue/10 rounded-full blur-3xl -z-10"></div>
-            
+
             <div className="relative z-10">
               <div className="bg-asego-light border border-slate-200 rounded-[2rem] p-6 shadow-2xl space-y-4">
                 <div className="flex items-center justify-between mb-4">
@@ -188,7 +193,7 @@ const App: React.FC = () => {
                     Panel de Gestión
                   </div>
                 </div>
-                
+
                 <div className="grid grid-cols-2 gap-4">
                   <div className="bg-white p-4 rounded-2xl border border-slate-100 shadow-sm">
                     <p className="text-xs text-asego-grey mb-1">Vencimientos Hoy</p>
@@ -199,7 +204,7 @@ const App: React.FC = () => {
                     <p className="text-2xl font-bold font-display text-asego-green">08</p>
                   </div>
                 </div>
-                
+
                 <div className="bg-asego-dark rounded-2xl p-4 text-white">
                   <div className="flex justify-between items-center mb-4">
                     <p className="font-semibold text-sm">Actividad Reciente</p>
@@ -217,8 +222,8 @@ const App: React.FC = () => {
                   </div>
                 </div>
               </div>
-              
-              <motion.div 
+
+              <motion.div
                 animate={{ y: [0, -15, 0] }}
                 transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
                 className="absolute -bottom-6 -right-6 md:-right-12 bg-white p-5 rounded-2xl border border-slate-100 shadow-2xl flex items-center gap-4 z-20"
@@ -239,8 +244,8 @@ const App: React.FC = () => {
       {/* Problem Section */}
       <section id="problema" className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-6">
-          <SectionHeading 
-            title="El caos diario de un productor" 
+          <SectionHeading
+            title="El caos diario de un productor"
             subtitle="Sabemos lo que es estar tapado de tareas operativas que no te dejan vender."
           />
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -317,7 +322,7 @@ const App: React.FC = () => {
                 </li>
               </ul>
             </Card>
-            
+
             <Card className="bg-white text-black border-2 border-asego-dark/20 p-10 shadow-xl shadow-slate-900/5">
               <LayoutDashboard className="mb-6 text-asego-dark" size={40} />
               <h3 className="text-3xl font-bold font-display mb-6 text-black">Para Brokers</h3>
@@ -409,13 +414,13 @@ const App: React.FC = () => {
             Sumate a los productores que ya modernizaron su gestión con ASEGO.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a 
+            <a
               href="tel:3815709287"
               className="bg-white text-asego-blue px-10 py-5 rounded-full font-bold text-xl hover:bg-slate-50 transition-all shadow-2xl flex items-center justify-center"
             >
               Ver ASEGO en acción
             </a>
-            <a 
+            <a
               href="tel:3815709287"
               className="bg-blue-600/40 text-white border border-white/20 px-10 py-5 rounded-full font-bold text-xl hover:bg-white/10 transition-all flex items-center justify-center"
             >
