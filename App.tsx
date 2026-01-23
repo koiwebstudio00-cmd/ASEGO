@@ -12,7 +12,12 @@ import {
   AlertCircle,
   TrendingUp,
   Zap,
-  Users
+  Users,
+  Facebook,
+  Instagram,
+  Linkedin,
+  Twitter,
+  Mail
 } from 'lucide-react';
 
 // --- Components ---
@@ -27,6 +32,7 @@ const Navbar = () => (
         <a href="#problema" className="hover:text-asego-blue transition-colors">Problema</a>
         <a href="#solucion" className="hover:text-asego-blue transition-colors">Solución</a>
         <a href="#beneficios" className="hover:text-asego-blue transition-colors">Beneficios</a>
+        <a href="#pricing" className="hover:text-asego-blue transition-colors">Precios</a>
         <a
           href="tel:3815709287"
           className="bg-asego-blue text-white px-6 py-2.5 rounded-full font-semibold hover:bg-blue-700 transition-all shadow-lg shadow-blue-500/20"
@@ -78,10 +84,10 @@ const ChatSimulation = () => {
               className={`flex ${msg.type === 'user' ? 'justify-end' : 'justify-start'}`}
             >
               <div className={`max-w-[80%] rounded-2xl p-3 text-sm ${msg.type === 'user'
-                  ? 'bg-asego-blue text-white rounded-tr-none'
-                  : msg.type === 'file'
-                    ? 'bg-slate-100 text-asego-dark border border-slate-200 flex items-center gap-3'
-                    : 'bg-slate-100 text-asego-dark rounded-tl-none'
+                ? 'bg-asego-blue text-white rounded-tr-none'
+                : msg.type === 'file'
+                  ? 'bg-slate-100 text-asego-dark border border-slate-200 flex items-center gap-3'
+                  : 'bg-slate-100 text-asego-dark rounded-tl-none'
                 }`}>
                 {msg.type === 'file' && <FileText className="text-asego-blue shrink-0" size={18} />}
                 <div>
@@ -370,6 +376,178 @@ const App: React.FC = () => {
         </div>
       </section>
 
+      {/* Pricing Section */}
+      <section id="pricing" className="py-24 bg-white relative overflow-hidden">
+        {/* Decorative elements similar to reference */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full pointer-events-none opacity-50">
+          <div className="absolute top-20 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-asego-blue/5 rounded-full blur-3xl"></div>
+        </div>
+
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
+          <div className="text-center mb-20">
+            <h2 className="text-5xl md:text-6xl font-bold font-display text-asego-dark mb-6">
+              Inversión mínima,<br />
+              <span className="text-asego-blue">Gran impulso a tu productividad</span>
+            </h2>
+            <div className="flex flex-wrap justify-center items-center gap-4 text-sm text-asego-grey font-medium mb-12">
+              <span className="flex items-center gap-2">
+                <ShieldCheck size={16} className="text-asego-blue" /> Sin cuota de ingreso
+              </span>
+              <span className="text-slate-300">•</span>
+              <span className="flex items-center gap-2">
+                <CheckCircle2 size={16} className="text-asego-blue" /> Todas las funciones incluidas
+              </span>
+              <span className="text-slate-300">•</span>
+              <span className="flex items-center gap-2">
+                <Zap size={16} className="text-asego-blue" /> Soporte prioritario
+              </span>
+            </div>
+          </div>
+
+          <div className="grid lg:grid-cols-3 gap-8 items-stretch">
+            {/* Plan Base */}
+            <Card className="flex flex-col h-full bg-white border border-slate-100 hover:shadow-2xl transition-all duration-500">
+              <div className="mb-8">
+                <div className="w-12 h-12 bg-slate-50 rounded-2xl flex items-center justify-center mb-6">
+                  <ShieldCheck className="text-asego-dark" size={24} />
+                </div>
+                <h3 className="text-2xl font-bold font-display text-asego-dark">Plan Base</h3>
+                <p className="text-asego-grey text-sm mt-1">Para carteras iniciales</p>
+              </div>
+              <div className="mb-8">
+                <div className="flex items-baseline gap-1">
+                  <span className="text-5xl font-bold text-asego-dark">$59.999</span>
+                  <span className="text-asego-grey text-sm font-medium">/mes</span>
+                </div>
+              </div>
+              <a
+                href="tel:3815709287"
+                className="w-full py-4 px-6 rounded-xl border border-slate-200 font-bold text-asego-dark hover:bg-slate-50 transition-all text-center mb-10"
+              >
+                Comenzar ahora
+              </a>
+              <div className="space-y-4 flex-1">
+                <div className="flex items-center gap-3">
+                  <CheckCircle2 className="text-asego-blue shrink-0" size={18} />
+                  <span className="text-asego-dark font-medium underline decoration-slate-200 underline-offset-4">3 pólizas por cliente</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <CheckCircle2 className="text-asego-blue shrink-0" size={18} />
+                  <span className="text-asego-dark font-medium underline decoration-slate-200 underline-offset-4">3000 mensajes mensuales</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <CheckCircle2 className="text-asego-blue shrink-0" size={18} />
+                  <span className="text-asego-dark font-medium underline decoration-slate-200 underline-offset-4">Landing Básica</span>
+                </div>
+              </div>
+            </Card>
+
+            {/* Plan Intermedio */}
+            <Card className="flex flex-col h-full bg-asego-dark text-white border-none shadow-2xl lg:scale-110 z-10 relative overflow-hidden p-1">
+              <div className="bg-[#1e293b] p-8 rounded-[2.2rem] h-full flex flex-col relative overflow-hidden">
+                {/* Mesh background effect for the dark card */}
+                <div className="absolute top-0 right-0 w-full h-full opacity-20 pointer-events-none">
+                  <div className="absolute top-[-20%] right-[-20%] w-[150%] h-[150%] bg-[radial-gradient(circle_at_center,#0055D4_0%,transparent_50%)]"></div>
+                </div>
+
+                {/* Subtle Grid for dark card */}
+                <div className="absolute inset-0 opacity-10 pointer-events-none bg-[linear-gradient(to_right,#ffffff1a_1px,transparent_1px),linear-gradient(to_bottom,#ffffff1a_1px,transparent_1px)] bg-[size:20px_20px]"></div>
+
+                <div className="absolute top-0 right-0 bg-asego-green px-4 py-1.5 rounded-bl-xl text-[10px] font-bold uppercase tracking-wider text-asego-dark z-20">
+                  MÁS POPULAR
+                </div>
+
+                <div className="mb-8 relative z-10">
+                  <div className="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center mb-6">
+                    <Zap className="text-asego-green" size={24} fill="currentColor" />
+                  </div>
+                  <h3 className="text-2xl font-bold font-display text-white">Plan Intermedio</h3>
+                  <p className="text-white/60 text-sm mt-1">Ideal para productores en crecimiento</p>
+                </div>
+
+                <div className="mb-8 relative z-10">
+                  <div className="flex items-baseline gap-1">
+                    <span className="text-5xl font-bold text-white">$109.000</span>
+                    <span className="text-white/60 text-sm font-medium">/mes</span>
+                  </div>
+                </div>
+
+                <a
+                  href="tel:3815709287"
+                  className="w-full py-4 px-6 rounded-xl bg-asego-blue text-white font-bold hover:bg-blue-600 transition-all text-center mb-10 shadow-xl shadow-blue-500/20 relative z-10"
+                >
+                  Obtener Plan Intermedio
+                </a>
+
+                <div className="space-y-4 flex-1 relative z-10">
+                  <div className="flex items-center gap-3">
+                    <CheckCircle2 className="text-asego-green shrink-0" size={18} />
+                    <span className="text-white/90 font-medium underline decoration-white/10 underline-offset-4">10 pólizas por cliente</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <CheckCircle2 className="text-asego-green shrink-0" size={18} />
+                    <span className="text-white/90 font-medium underline decoration-white/10 underline-offset-4">7500 mensajes mensuales</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <CheckCircle2 className="text-asego-green shrink-0" size={18} />
+                    <span className="text-white/90 font-medium underline decoration-white/10 underline-offset-4">Landing Premium</span>
+                  </div>
+                </div>
+              </div>
+            </Card>
+
+            {/* Plan Pro */}
+            <Card className="flex flex-col h-full bg-white border border-slate-100 hover:shadow-2xl transition-all duration-500">
+              <div className="mb-8">
+                <div className="w-12 h-12 bg-slate-50 rounded-2xl flex items-center justify-center mb-6">
+                  <Users className="text-asego-dark" size={24} />
+                </div>
+                <h3 className="text-2xl font-bold font-display text-asego-dark">Plan Pro</h3>
+                <p className="text-asego-grey text-sm mt-1">Potencial ilimitado para brokers</p>
+              </div>
+              <div className="mb-8">
+                <div className="flex items-baseline gap-1">
+                  <span className="text-5xl font-bold text-asego-dark">$190.000</span>
+                  <span className="text-asego-grey text-sm font-medium">/mes</span>
+                </div>
+              </div>
+              <a
+                href="tel:3815709287"
+                className="w-full py-4 px-6 rounded-xl border border-slate-200 font-bold text-asego-dark hover:bg-slate-50 transition-all text-center mb-10"
+              >
+                Contactar para Pro
+              </a>
+              <div className="space-y-4 flex-1">
+                <div className="flex items-center gap-3">
+                  <CheckCircle2 className="text-asego-blue shrink-0" size={18} />
+                  <span className="text-asego-dark font-medium underline decoration-slate-200 underline-offset-4">Infinitas pólizas por cliente</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <CheckCircle2 className="text-asego-blue shrink-0" size={18} />
+                  <span className="text-asego-dark font-medium underline decoration-slate-200 underline-offset-4">20000 mensajes mensuales</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <CheckCircle2 className="text-asego-blue shrink-0" size={18} />
+                  <span className="text-asego-dark font-medium underline decoration-slate-200 underline-offset-4">Landing Premium + Bot</span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <CheckCircle2 className="text-asego-blue shrink-0 mt-1" size={18} />
+                  <span className="text-asego-dark font-medium underline decoration-slate-200 underline-offset-4 leading-snug">Recordatorios (350 mensajes/mes acumulables)</span>
+                </div>
+              </div>
+            </Card>
+          </div>
+
+          <div className="mt-20 text-center">
+            <p className="text-sm text-asego-grey mb-4">Precios finales en Pesos Argentinos. Pueden aplicar impuestos locales.</p>
+            <div className="flex items-center justify-center gap-2 text-asego-grey">
+              <ShieldCheck size={14} />
+              <span className="text-xs">Pago seguro y gestión inmediata. Sin contratos de permanencia.</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Differential Section */}
       <section className="py-24 bg-white overflow-hidden relative">
         <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
@@ -403,46 +581,109 @@ const App: React.FC = () => {
         </div>
       </section>
 
-      {/* Final CTA - ENSURE tel link */}
-      <section className="py-24 bg-asego-blue relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-1/2 h-full bg-white opacity-[0.03] -skew-x-12 translate-x-20"></div>
-        <div className="max-w-7xl mx-auto px-6 relative z-10 text-center text-white">
-          <h2 className="text-5xl md:text-6xl font-bold font-display mb-8">
-            Dejá de perder tiempo en tareas repetitivas.
-          </h2>
-          <p className="text-xl opacity-80 mb-12 max-w-2xl mx-auto">
-            Sumate a los productores que ya modernizaron su gestión con ASEGO.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a
-              href="tel:3815709287"
-              className="bg-white text-asego-blue px-10 py-5 rounded-full font-bold text-xl hover:bg-slate-50 transition-all shadow-2xl flex items-center justify-center"
-            >
-              Ver ASEGO en acción
-            </a>
-            <a
-              href="tel:3815709287"
-              className="bg-blue-600/40 text-white border border-white/20 px-10 py-5 rounded-full font-bold text-xl hover:bg-white/10 transition-all flex items-center justify-center"
-            >
-              Hablemos hoy
-            </a>
+      {/* Final CTA - Redesigned like reference */}
+      <section className="py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="relative rounded-[3rem] overflow-hidden bg-gradient-to-br from-asego-blue via-blue-600 to-asego-green p-12 md:p-20 text-center">
+            {/* Animated background blobs */}
+            <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+              <div className="absolute -top-1/2 -left-1/4 w-[100%] h-[150%] bg-white/10 blur-[120px] rounded-full animate-pulse"></div>
+              <div className="absolute -bottom-1/2 -right-1/4 w-[100%] h-[150%] bg-asego-dark/10 blur-[120px] rounded-full"></div>
+            </div>
+
+            <div className="relative z-10 max-w-4xl mx-auto">
+              <h2 className="text-5xl md:text-6xl font-bold font-display text-white mb-8 leading-[1.1]">
+                Dejá que la IA se encargue del trabajo pesado de tu oficina
+              </h2>
+              <p className="text-xl text-white/80 mb-12 max-w-2xl mx-auto">
+                Desde avisos de vencimientos hasta envío de pólizas y atención al cliente. Automatizá las tareas que tu equipo ya no debería hacer manualmente.
+              </p>
+              <a
+                href="tel:3815709287"
+                className="inline-flex items-center gap-2 bg-white text-asego-dark px-10 py-5 rounded-full font-bold text-xl hover:bg-slate-50 transition-all shadow-2xl group"
+              >
+                Ver ASEGO en acción <ArrowRight size={22} className="group-hover:translate-x-1 transition-transform" />
+              </a>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="py-12 border-t border-slate-100 bg-white">
-        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8">
-          <div className="flex items-center">
-            <img src="/assets/logo.png" alt="ASEGO Logo" className="h-10 w-auto" />
+      {/* Footer - Redesigned like reference */}
+      <footer className="pt-24 pb-12 bg-white border-t border-slate-100">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 mb-20">
+            {/* Brand Column */}
+            <div className="lg:col-span-4">
+              <img src="/assets/logo.png" alt="ASEGO Logo" className="h-10 w-auto mb-8" />
+              <p className="text-asego-grey leading-relaxed mb-8 max-w-sm">
+                La solución definitiva para que productores y brokers de seguros automaticen su gestión operativa por WhatsApp.
+              </p>
+              <div className="flex gap-5">
+                {[
+                  { icon: <Facebook size={20} />, href: "#" },
+                  { icon: <Instagram size={20} />, href: "#" },
+                  { icon: <Linkedin size={20} />, href: "#" },
+                  { icon: <Twitter size={20} />, href: "#" }
+                ].map((social, i) => (
+                  <a key={i} href={social.href} className="w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center text-asego-dark hover:bg-asego-blue hover:text-white hover:border-asego-blue transition-all">
+                    {social.icon}
+                  </a>
+                ))}
+              </div>
+            </div>
+
+            {/* Links Columns */}
+            <div className="lg:col-span-2">
+              <h4 className="font-bold text-asego-dark mb-6">Compañía</h4>
+              <ul className="space-y-4 text-asego-grey font-medium">
+                <li><a href="#" className="hover:text-asego-blue transition-colors">Inicio</a></li>
+                <li><a href="#problema" className="hover:text-asego-blue transition-colors">Sobre nosotros</a></li>
+                <li><a href="#pricing" className="hover:text-asego-blue transition-colors">Precios</a></li>
+                <li><a href="#" className="hover:text-asego-blue transition-colors">Blog</a></li>
+              </ul>
+            </div>
+
+            <div className="lg:col-span-2">
+              <h4 className="font-bold text-asego-dark mb-6">Producto</h4>
+              <ul className="space-y-4 text-asego-grey font-medium">
+                <li><a href="#solucion" className="hover:text-asego-blue transition-colors">Funciones</a></li>
+                <li><a href="#beneficios" className="hover:text-asego-blue transition-colors">Beneficios</a></li>
+                <li><a href="#" className="hover:text-asego-blue transition-colors">Cómo funciona</a></li>
+                <li><a href="tel:3815709287" className="hover:text-asego-blue transition-colors">Contacto</a></li>
+              </ul>
+            </div>
+
+            {/* Newsletter Column */}
+            <div className="lg:col-span-4">
+              <h4 className="font-bold text-asego-dark mb-6">Novedades</h4>
+              <p className="text-asego-grey mb-6 text-sm">
+                Recibí consejos sobre IA y actualizaciones de ASEGO en tu email.
+              </p>
+              <div className="relative">
+                <input
+                  type="email"
+                  placeholder="Tu email"
+                  className="w-full bg-slate-50 border border-slate-200 rounded-full py-4 px-6 pr-36 outline-none focus:border-asego-blue transition-colors"
+                />
+                <button className="absolute right-1.5 top-1.5 bottom-1.5 px-6 bg-asego-blue text-white rounded-full font-bold text-sm hover:bg-blue-700 transition-all flex items-center gap-2">
+                  Suscribirse <ArrowRight size={14} />
+                </button>
+              </div>
+            </div>
           </div>
-          <p className="text-asego-grey text-sm">
-            © {new Date().getFullYear()} ASEGO. Todos los derechos reservados.
-          </p>
-          <div className="flex gap-6 text-asego-grey text-sm font-medium">
-            <a href="#" className="hover:text-asego-blue">Privacidad</a>
-            <a href="#" className="hover:text-asego-blue">Términos</a>
-            <a href="tel:3815709287" className="hover:text-asego-blue">Contacto</a>
+
+          {/* Bottom Bar */}
+          <div className="pt-8 border-t border-slate-100 flex flex-col md:flex-row justify-between items-center gap-6">
+            <p className="text-asego-grey text-[13px] font-medium">
+              © {new Date().getFullYear()} ASEGO. Todos los derechos reservados.
+            </p>
+            <div className="flex flex-wrap justify-center gap-8 text-[13px] font-medium text-asego-grey">
+              <a href="#" className="hover:text-asego-blue transition-colors">Políticas de Privacidad</a>
+              <a href="#" className="hover:text-asego-blue transition-colors">Términos de Servicio</a>
+              <a href="#" className="hover:text-asego-blue transition-colors">Seguridad</a>
+              <a href="#" className="hover:text-asego-blue transition-colors">Cookies</a>
+            </div>
           </div>
         </div>
       </footer>
