@@ -20,6 +20,46 @@ import {
   Mail
 } from 'lucide-react';
 
+// --- Animation Variants ---
+
+const fadeInUp = {
+  initial: { opacity: 0, y: 30 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, margin: "-100px" },
+  transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] }
+};
+
+const staggerContainer = {
+  initial: {},
+  whileInView: {
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.1
+    }
+  },
+  viewport: { once: true, margin: "-100px" }
+};
+
+const itemVariants = {
+  initial: { opacity: 0, y: 20 },
+  whileInView: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: "easeOut" }
+  },
+  viewport: { once: true }
+};
+
+const textFade = {
+  initial: { opacity: 0, x: -20 },
+  whileInView: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.6, ease: "easeOut" }
+  },
+  viewport: { once: true }
+};
+
 // --- Components ---
 
 const Navbar = () => (
@@ -111,10 +151,28 @@ const ChatSimulation = () => {
 };
 
 const SectionHeading = ({ title, subtitle, centered = true }: { title: string; subtitle?: string; centered?: boolean }) => (
-  <div className={`mb-16 ${centered ? 'text-center' : 'text-left'}`}>
-    <h2 className="text-4xl md:text-5xl font-bold font-display text-asego-dark mb-4">{title}</h2>
-    {subtitle && <p className="text-lg text-asego-grey max-w-2xl mx-auto">{subtitle}</p>}
-  </div>
+  <motion.div
+    variants={staggerContainer}
+    initial="initial"
+    whileInView="whileInView"
+    viewport={{ once: true, margin: "-100px" }}
+    className={`mb-16 ${centered ? 'text-center' : 'text-left'}`}
+  >
+    <motion.h2
+      variants={itemVariants}
+      className="text-4xl md:text-5xl font-bold font-display text-asego-dark mb-4"
+    >
+      {title}
+    </motion.h2>
+    {subtitle && (
+      <motion.p
+        variants={itemVariants}
+        className="text-lg text-asego-grey max-w-2xl mx-auto"
+      >
+        {subtitle}
+      </motion.p>
+    )}
+  </motion.div>
 );
 
 interface CardProps {
@@ -124,10 +182,9 @@ interface CardProps {
 
 const Card: React.FC<CardProps> = ({ children, className = "" }) => (
   <motion.div
-    initial={{ opacity: 0, y: 20 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true }}
-    className={`bg-white p-8 rounded-3xl border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-300 ${className}`}
+    variants={itemVariants}
+    whileHover={{ y: -10, transition: { duration: 0.3 } }}
+    className={`bg-white p-8 rounded-3xl border border-slate-100 shadow-sm hover:shadow-xl transition-shadow duration-300 ${className}`}
   >
     {children}
   </motion.div>
@@ -148,21 +205,35 @@ const App: React.FC = () => {
       <section className="relative pt-32 pb-20 overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
+            variants={staggerContainer}
+            initial="initial"
+            whileInView="whileInView"
+            viewport={{ once: true }}
+            className="flex flex-col"
           >
-            <div className="inline-flex items-center gap-2 bg-blue-50 text-asego-blue px-4 py-2 rounded-full font-semibold text-sm mb-6 border border-blue-100">
+            <motion.div
+              variants={itemVariants}
+              className="inline-flex items-center gap-2 bg-blue-50 text-asego-blue px-4 py-2 rounded-full font-semibold text-sm mb-6 border border-blue-100 self-start"
+            >
               <Zap size={16} fill="currentColor" />
               Gestión moderna para productores
-            </div>
-            <h1 className="text-6xl md:text-7xl font-bold font-display text-asego-dark leading-[1.1] mb-8">
+            </motion.div>
+            <motion.h1
+              variants={itemVariants}
+              className="text-6xl md:text-7xl font-bold font-display text-asego-dark leading-[1.1] mb-8"
+            >
               Gestioná tus seguros por WhatsApp <span className="text-asego-blue">sin perder tiempo.</span>
-            </h1>
-            <p className="text-xl text-asego-grey leading-relaxed mb-10 max-w-lg">
+            </motion.h1>
+            <motion.p
+              variants={itemVariants}
+              className="text-xl text-asego-grey leading-relaxed mb-10 max-w-lg"
+            >
               El asistente digital que responde a tus clientes, envía pólizas y avisa vencimientos de forma automática.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4">
+            </motion.p>
+            <motion.div
+              variants={itemVariants}
+              className="flex flex-col sm:flex-row gap-4"
+            >
               <a
                 href="tel:3815709287"
                 className="bg-asego-blue text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-blue-700 transition-all flex items-center justify-center gap-2 shadow-xl shadow-blue-500/20"
@@ -175,7 +246,7 @@ const App: React.FC = () => {
               >
                 Quiero ASEGO
               </a>
-            </div>
+            </motion.div>
           </motion.div>
 
           <motion.div
@@ -254,7 +325,13 @@ const App: React.FC = () => {
             title="El caos diario de un productor"
             subtitle="Sabemos lo que es estar tapado de tareas operativas que no te dejan vender."
           />
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <motion.div
+            variants={staggerContainer}
+            initial="initial"
+            whileInView="whileInView"
+            viewport={{ once: true }}
+            className="grid md:grid-cols-2 lg:grid-cols-4 gap-6"
+          >
             {[
               { icon: <MessageCircle className="text-red-500" />, title: "WhatsApp explotado", desc: "Cientos de mensajes pidiendo cosas básicas todo el día." },
               { icon: <Clock className="text-red-500" />, title: "Vencimientos olvidados", desc: "Pólizas que se caen por falta de un aviso a tiempo." },
@@ -269,7 +346,7 @@ const App: React.FC = () => {
                 <p className="text-asego-grey leading-relaxed">{p.desc}</p>
               </Card>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -277,13 +354,24 @@ const App: React.FC = () => {
       <section id="solucion" className="py-24 bg-asego-light border-y border-slate-100">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-20 items-center">
-            <div>
-              <h2 className="text-4xl md:text-5xl font-bold font-display text-asego-dark mb-6">
+            <motion.div
+              variants={staggerContainer}
+              initial="initial"
+              whileInView="whileInView"
+              viewport={{ once: true }}
+            >
+              <motion.h2
+                variants={itemVariants}
+                className="text-4xl md:text-5xl font-bold font-display text-asego-dark mb-6"
+              >
                 ASEGO: Tu asistente digital 24/7
-              </h2>
-              <p className="text-xl text-asego-grey leading-relaxed mb-8">
+              </motion.h2>
+              <motion.p
+                variants={itemVariants}
+                className="text-xl text-asego-grey leading-relaxed mb-8"
+              >
                 ASEGO es un asistente que responde por WhatsApp, avisa vencimientos, envía pólizas y mantiene el seguimiento de siniestros de forma automática.
-              </p>
+              </motion.p>
               <div className="space-y-4">
                 {[
                   "No requiere que aprendas nada nuevo.",
@@ -291,16 +379,30 @@ const App: React.FC = () => {
                   "Mantiene a tus clientes informados.",
                   "Se integra con tu forma de trabajo actual."
                 ].map((text, i) => (
-                  <div key={i} className="flex items-center gap-3">
+                  <motion.div
+                    key={i}
+                    variants={itemVariants}
+                    className="flex items-center gap-3"
+                  >
                     <CheckCircle2 className="text-asego-green" size={20} />
                     <span className="font-medium text-asego-dark">{text}</span>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
-            </div>
-            <div className="flex justify-center">
-              <ChatSimulation />
-            </div>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              className="flex justify-center"
+            >
+              <img
+                src="/assets/mockup.webp"
+                alt="ASEGO Mockup"
+                className="w-full max-w-[450px] drop-shadow-2xl animate-float"
+              />
+            </motion.div>
           </div>
         </div>
       </section>
@@ -309,23 +411,27 @@ const App: React.FC = () => {
       <section id="beneficios" className="py-24">
         <div className="max-w-7xl mx-auto px-6">
           <SectionHeading title="Impacto real en tu negocio" />
-          <div className="grid md:grid-cols-2 gap-8">
+          <motion.div
+            variants={staggerContainer}
+            initial="initial"
+            whileInView="whileInView"
+            viewport={{ once: true }}
+            className="grid md:grid-cols-2 gap-8"
+          >
             <Card className="bg-white text-black border-2 border-asego-blue/20 p-10 shadow-xl shadow-blue-500/5">
               <Users className="mb-6 text-asego-blue" size={40} />
               <h3 className="text-3xl font-bold font-display mb-6 text-black">Para Productores</h3>
               <ul className="space-y-6">
-                <li className="flex gap-4">
-                  <div className="w-7 h-7 rounded-full bg-asego-blue flex items-center justify-center shrink-0 text-white font-bold">1</div>
-                  <p className="text-lg font-bold leading-snug">Reducí el 80% de los mensajes operativos por WhatsApp.</p>
-                </li>
-                <li className="flex gap-4">
-                  <div className="w-7 h-7 rounded-full bg-asego-blue flex items-center justify-center shrink-0 text-white font-bold">2</div>
-                  <p className="text-lg font-bold leading-snug">Asegurá el 100% de tus renovaciones con avisos automáticos.</p>
-                </li>
-                <li className="flex gap-4">
-                  <div className="w-7 h-7 rounded-full bg-asego-blue flex items-center justify-center shrink-0 text-white font-bold">3</div>
-                  <p className="text-lg font-bold leading-snug">Recuperá horas de tu día para enfocarte en vender y crecer.</p>
-                </li>
+                {[
+                  "Reducí el 80% de los mensajes operativos por WhatsApp.",
+                  "Asegurá el 100% de tus renovaciones con avisos automáticos.",
+                  "Recuperá horas de tu día para enfocarte en vender y crecer."
+                ].map((text, i) => (
+                  <motion.li key={i} variants={itemVariants} className="flex gap-4">
+                    <div className="w-7 h-7 rounded-full bg-asego-blue flex items-center justify-center shrink-0 text-white font-bold">{i + 1}</div>
+                    <p className="text-lg font-bold leading-snug">{text}</p>
+                  </motion.li>
+                ))}
               </ul>
             </Card>
 
@@ -333,21 +439,19 @@ const App: React.FC = () => {
               <LayoutDashboard className="mb-6 text-asego-dark" size={40} />
               <h3 className="text-3xl font-bold font-display mb-6 text-black">Para Brokers</h3>
               <ul className="space-y-6">
-                <li className="flex gap-4">
-                  <div className="w-7 h-7 rounded-full bg-asego-dark flex items-center justify-center shrink-0 text-white font-bold">1</div>
-                  <p className="text-lg font-bold leading-snug">Centralizá y ordená la atención de toda tu red de productores.</p>
-                </li>
-                <li className="flex gap-4">
-                  <div className="w-7 h-7 rounded-full bg-asego-dark flex items-center justify-center shrink-0 text-white font-bold">2</div>
-                  <p className="text-lg font-bold leading-snug">Bajá costos operativos eliminando tareas manuales repetitivas.</p>
-                </li>
-                <li className="flex gap-4">
-                  <div className="w-7 h-7 rounded-full bg-asego-dark flex items-center justify-center shrink-0 text-white font-bold">3</div>
-                  <p className="text-lg font-bold leading-snug">Escalá tu volumen de pólizas sin necesidad de contratar más gente.</p>
-                </li>
+                {[
+                  "Centralizá y ordená la atención de toda tu red de productores.",
+                  "Bajá costos operativos eliminando tareas manuales repetitivas.",
+                  "Escalá tu volumen de pólizas sin necesidad de contratar más gente."
+                ].map((text, i) => (
+                  <motion.li key={i} variants={itemVariants} className="flex gap-4">
+                    <div className="w-7 h-7 rounded-full bg-asego-dark flex items-center justify-center shrink-0 text-white font-bold">{i + 1}</div>
+                    <p className="text-lg font-bold leading-snug">{text}</p>
+                  </motion.li>
+                ))}
               </ul>
             </Card>
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -355,7 +459,13 @@ const App: React.FC = () => {
       <section className="py-24 bg-asego-light">
         <div className="max-w-7xl mx-auto px-6">
           <SectionHeading title="Todo lo que hace por vos" subtitle="Funcionalidades concretas diseñadas para el mercado asegurador." />
-          <div className="grid md:grid-cols-3 gap-8">
+          <motion.div
+            variants={staggerContainer}
+            initial="initial"
+            whileInView="whileInView"
+            viewport={{ once: true }}
+            className="grid md:grid-cols-3 gap-8"
+          >
             {[
               { title: "Avisos de vencimiento", desc: "ASEGO contacta al cliente días antes de que venza la póliza o la cuota." },
               { title: "Envío de documentos", desc: "Tus clientes pueden pedir su póliza o certificado de cobertura en segundos." },
@@ -364,15 +474,20 @@ const App: React.FC = () => {
               { title: "Plataforma Web", desc: "Un panel simple para que veas todo lo que pasa en tiempo real." },
               { title: "Historial de Chat", desc: "Accedé a todas las conversaciones y pedidos desde un solo lugar." }
             ].map((f, i) => (
-              <div key={i} className="p-8 bg-white rounded-3xl border border-slate-100 shadow-sm">
+              <motion.div
+                key={i}
+                variants={itemVariants}
+                whileHover={{ y: -5 }}
+                className="p-8 bg-white rounded-3xl border border-slate-100 shadow-sm"
+              >
                 <div className="w-8 h-8 rounded-full bg-asego-blue flex items-center justify-center text-white mb-6">
                   <CheckCircle2 size={18} />
                 </div>
                 <h4 className="text-xl font-bold font-display text-asego-dark mb-3">{f.title}</h4>
                 <p className="text-asego-grey leading-relaxed">{f.desc}</p>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -404,7 +519,13 @@ const App: React.FC = () => {
             </div>
           </div>
 
-          <div className="grid lg:grid-cols-3 gap-8 items-stretch">
+          <motion.div
+            variants={staggerContainer}
+            initial="initial"
+            whileInView="whileInView"
+            viewport={{ once: true }}
+            className="grid lg:grid-cols-3 gap-8 items-stretch"
+          >
             {/* Plan Base */}
             <Card className="flex flex-col h-full bg-white border border-slate-100 hover:shadow-2xl transition-all duration-500">
               <div className="mb-8">
@@ -427,18 +548,16 @@ const App: React.FC = () => {
                 Comenzar ahora
               </a>
               <div className="space-y-4 flex-1">
-                <div className="flex items-center gap-3">
-                  <CheckCircle2 className="text-asego-blue shrink-0" size={18} />
-                  <span className="text-asego-dark font-medium underline decoration-slate-200 underline-offset-4">3 pólizas por cliente</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <CheckCircle2 className="text-asego-blue shrink-0" size={18} />
-                  <span className="text-asego-dark font-medium underline decoration-slate-200 underline-offset-4">3000 mensajes mensuales</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <CheckCircle2 className="text-asego-blue shrink-0" size={18} />
-                  <span className="text-asego-dark font-medium underline decoration-slate-200 underline-offset-4">Landing Básica</span>
-                </div>
+                {[
+                  "3 pólizas por cliente",
+                  "3000 mensajes mensuales",
+                  "Landing Básica"
+                ].map((item, i) => (
+                  <div key={i} className="flex items-center gap-3">
+                    <CheckCircle2 className="text-asego-blue shrink-0" size={18} />
+                    <span className="text-asego-dark font-medium underline decoration-slate-200 underline-offset-4">{item}</span>
+                  </div>
+                ))}
               </div>
             </Card>
 
@@ -480,18 +599,16 @@ const App: React.FC = () => {
                 </a>
 
                 <div className="space-y-4 flex-1 relative z-10">
-                  <div className="flex items-center gap-3">
-                    <CheckCircle2 className="text-asego-green shrink-0" size={18} />
-                    <span className="text-white/90 font-medium underline decoration-white/10 underline-offset-4">10 pólizas por cliente</span>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <CheckCircle2 className="text-asego-green shrink-0" size={18} />
-                    <span className="text-white/90 font-medium underline decoration-white/10 underline-offset-4">7500 mensajes mensuales</span>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <CheckCircle2 className="text-asego-green shrink-0" size={18} />
-                    <span className="text-white/90 font-medium underline decoration-white/10 underline-offset-4">Landing Premium</span>
-                  </div>
+                  {[
+                    "10 pólizas por cliente",
+                    "7500 mensajes mensuales",
+                    "Landing Premium"
+                  ].map((item, i) => (
+                    <div key={i} className="flex items-center gap-3">
+                      <CheckCircle2 className="text-asego-green shrink-0" size={18} />
+                      <span className="text-white/90 font-medium underline decoration-white/10 underline-offset-4">{item}</span>
+                    </div>
+                  ))}
                 </div>
               </div>
             </Card>
@@ -518,25 +635,20 @@ const App: React.FC = () => {
                 Contactar para Pro
               </a>
               <div className="space-y-4 flex-1">
-                <div className="flex items-center gap-3">
-                  <CheckCircle2 className="text-asego-blue shrink-0" size={18} />
-                  <span className="text-asego-dark font-medium underline decoration-slate-200 underline-offset-4">Infinitas pólizas por cliente</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <CheckCircle2 className="text-asego-blue shrink-0" size={18} />
-                  <span className="text-asego-dark font-medium underline decoration-slate-200 underline-offset-4">20000 mensajes mensuales</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <CheckCircle2 className="text-asego-blue shrink-0" size={18} />
-                  <span className="text-asego-dark font-medium underline decoration-slate-200 underline-offset-4">Landing Premium + Bot</span>
-                </div>
-                <div className="flex items-start gap-3">
-                  <CheckCircle2 className="text-asego-blue shrink-0 mt-1" size={18} />
-                  <span className="text-asego-dark font-medium underline decoration-slate-200 underline-offset-4 leading-snug">Recordatorios (350 mensajes/mes acumulables)</span>
-                </div>
+                {[
+                  "Infinitas pólizas por cliente",
+                  "20000 mensajes mensuales",
+                  "Landing Premium + Bot",
+                  "Recordatorios (350 mensajes/mes acumulables)"
+                ].map((item, i) => (
+                  <div key={i} className="flex items-start gap-3">
+                    <CheckCircle2 className="text-asego-blue shrink-0 mt-1" size={18} />
+                    <span className="text-asego-dark font-medium underline decoration-slate-200 underline-offset-4 leading-snug">{item}</span>
+                  </div>
+                ))}
               </div>
             </Card>
-          </div>
+          </motion.div>
 
           <div className="mt-20 text-center">
             <p className="text-sm text-asego-grey mb-4">Precios finales en Pesos Argentinos. Pueden aplicar impuestos locales.</p>
@@ -552,31 +664,45 @@ const App: React.FC = () => {
       <section className="py-24 bg-white overflow-hidden relative">
         <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
+            variants={staggerContainer}
+            initial="initial"
+            whileInView="whileInView"
             viewport={{ once: true }}
           >
-            <ShieldCheck className="mx-auto mb-8 text-asego-green" size={64} />
-            <h2 className="text-4xl md:text-5xl font-bold font-display text-asego-dark mb-6">
+            <motion.div variants={itemVariants}>
+              <ShieldCheck className="mx-auto mb-8 text-asego-green" size={64} />
+            </motion.div>
+            <motion.h2
+              variants={itemVariants}
+              className="text-4xl md:text-5xl font-bold font-display text-asego-dark mb-6"
+            >
               ASEGO no te reemplaza, <span className="text-asego-blue">te potencia.</span>
-            </h2>
-            <p className="text-2xl text-asego-grey italic mb-8">
+            </motion.h2>
+            <motion.p
+              variants={itemVariants}
+              className="text-2xl text-asego-grey italic mb-8"
+            >
               "ASEGO trabaja en segundo plano para que vos te preocupe por vender."
-            </p>
-            <div className="flex flex-wrap justify-center gap-6">
-              <div className="flex items-center gap-2 text-asego-dark font-semibold">
-                <CheckCircle2 className="text-asego-green" size={20} />
-                Sin curvas de aprendizaje
-              </div>
-              <div className="flex items-center gap-2 text-asego-dark font-semibold">
-                <CheckCircle2 className="text-asego-green" size={20} />
-                Instalación inmediata
-              </div>
-              <div className="flex items-center gap-2 text-asego-dark font-semibold">
-                <CheckCircle2 className="text-asego-green" size={20} />
-                Soporte personalizado
-              </div>
-            </div>
+            </motion.p>
+            <motion.div
+              variants={staggerContainer}
+              className="flex flex-wrap justify-center gap-6"
+            >
+              {[
+                "Sin curvas de aprendizaje",
+                "Instalación inmediata",
+                "Soporte personalizado"
+              ].map((item, i) => (
+                <motion.div
+                  key={i}
+                  variants={itemVariants}
+                  className="flex items-center gap-2 text-asego-dark font-semibold"
+                >
+                  <CheckCircle2 className="text-asego-green" size={20} />
+                  {item}
+                </motion.div>
+              ))}
+            </motion.div>
           </motion.div>
         </div>
       </section>
@@ -584,107 +710,51 @@ const App: React.FC = () => {
       {/* Final CTA - Redesigned like reference */}
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="relative rounded-[3rem] overflow-hidden bg-gradient-to-br from-asego-blue via-blue-600 to-asego-green p-12 md:p-20 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="relative rounded-[3rem] overflow-hidden bg-gradient-to-br from-asego-blue via-blue-600 to-asego-green p-12 md:p-20 text-center"
+          >
             {/* Animated background blobs */}
             <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
               <div className="absolute -top-1/2 -left-1/4 w-[100%] h-[150%] bg-white/10 blur-[120px] rounded-full animate-pulse"></div>
               <div className="absolute -bottom-1/2 -right-1/4 w-[100%] h-[150%] bg-asego-dark/10 blur-[120px] rounded-full"></div>
             </div>
 
-            <div className="relative z-10 max-w-4xl mx-auto">
-              <h2 className="text-5xl md:text-6xl font-bold font-display text-white mb-8 leading-[1.1]">
+            <motion.div
+              variants={staggerContainer}
+              initial="initial"
+              whileInView="whileInView"
+              viewport={{ once: true }}
+              className="relative z-10 max-w-4xl mx-auto"
+            >
+              <motion.h2 variants={itemVariants} className="text-5xl md:text-6xl font-bold font-display text-white mb-8 leading-[1.1]">
                 Dejá que la IA se encargue del trabajo pesado de tu oficina
-              </h2>
-              <p className="text-xl text-white/80 mb-12 max-w-2xl mx-auto">
+              </motion.h2>
+              <motion.p variants={itemVariants} className="text-xl text-white/80 mb-12 max-w-2xl mx-auto">
                 Desde avisos de vencimientos hasta envío de pólizas y atención al cliente. Automatizá las tareas que tu equipo ya no debería hacer manualmente.
-              </p>
-              <a
-                href="tel:3815709287"
-                className="inline-flex items-center gap-2 bg-white text-asego-dark px-10 py-5 rounded-full font-bold text-xl hover:bg-slate-50 transition-all shadow-2xl group"
-              >
-                Ver ASEGO en acción <ArrowRight size={22} className="group-hover:translate-x-1 transition-transform" />
-              </a>
-            </div>
-          </div>
+              </motion.p>
+              <motion.div variants={itemVariants}>
+                <a
+                  href="tel:3815709287"
+                  className="inline-flex items-center gap-2 bg-white text-asego-dark px-10 py-5 rounded-full font-bold text-xl hover:bg-slate-50 transition-all shadow-2xl group"
+                >
+                  Ver ASEGO en acción <ArrowRight size={22} className="group-hover:translate-x-1 transition-transform" />
+                </a>
+              </motion.div>
+            </motion.div>
+          </motion.div>
         </div>
       </section>
 
-      {/* Footer - Redesigned like reference */}
-      <footer className="pt-24 pb-12 bg-white border-t border-slate-100">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 mb-20">
-            {/* Brand Column */}
-            <div className="lg:col-span-4">
-              <img src="/assets/logo.png" alt="ASEGO Logo" className="h-10 w-auto mb-8" />
-              <p className="text-asego-grey leading-relaxed mb-8 max-w-sm">
-                La solución definitiva para que productores y brokers de seguros automaticen su gestión operativa por WhatsApp.
-              </p>
-              <div className="flex gap-5">
-                {[
-                  { icon: <Facebook size={20} />, href: "#" },
-                  { icon: <Instagram size={20} />, href: "#" },
-                  { icon: <Linkedin size={20} />, href: "#" },
-                  { icon: <Twitter size={20} />, href: "#" }
-                ].map((social, i) => (
-                  <a key={i} href={social.href} className="w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center text-asego-dark hover:bg-asego-blue hover:text-white hover:border-asego-blue transition-all">
-                    {social.icon}
-                  </a>
-                ))}
-              </div>
-            </div>
-
-            {/* Links Columns */}
-            <div className="lg:col-span-2">
-              <h4 className="font-bold text-asego-dark mb-6">Compañía</h4>
-              <ul className="space-y-4 text-asego-grey font-medium">
-                <li><a href="#" className="hover:text-asego-blue transition-colors">Inicio</a></li>
-                <li><a href="#problema" className="hover:text-asego-blue transition-colors">Sobre nosotros</a></li>
-                <li><a href="#pricing" className="hover:text-asego-blue transition-colors">Precios</a></li>
-                <li><a href="#" className="hover:text-asego-blue transition-colors">Blog</a></li>
-              </ul>
-            </div>
-
-            <div className="lg:col-span-2">
-              <h4 className="font-bold text-asego-dark mb-6">Producto</h4>
-              <ul className="space-y-4 text-asego-grey font-medium">
-                <li><a href="#solucion" className="hover:text-asego-blue transition-colors">Funciones</a></li>
-                <li><a href="#beneficios" className="hover:text-asego-blue transition-colors">Beneficios</a></li>
-                <li><a href="#" className="hover:text-asego-blue transition-colors">Cómo funciona</a></li>
-                <li><a href="tel:3815709287" className="hover:text-asego-blue transition-colors">Contacto</a></li>
-              </ul>
-            </div>
-
-            {/* Newsletter Column */}
-            <div className="lg:col-span-4">
-              <h4 className="font-bold text-asego-dark mb-6">Novedades</h4>
-              <p className="text-asego-grey mb-6 text-sm">
-                Recibí consejos sobre IA y actualizaciones de ASEGO en tu email.
-              </p>
-              <div className="relative">
-                <input
-                  type="email"
-                  placeholder="Tu email"
-                  className="w-full bg-slate-50 border border-slate-200 rounded-full py-4 px-6 pr-36 outline-none focus:border-asego-blue transition-colors"
-                />
-                <button className="absolute right-1.5 top-1.5 bottom-1.5 px-6 bg-asego-blue text-white rounded-full font-bold text-sm hover:bg-blue-700 transition-all flex items-center gap-2">
-                  Suscribirse <ArrowRight size={14} />
-                </button>
-              </div>
-            </div>
-          </div>
-
-          {/* Bottom Bar */}
-          <div className="pt-8 border-t border-slate-100 flex flex-col md:flex-row justify-between items-center gap-6">
-            <p className="text-asego-grey text-[13px] font-medium">
-              © {new Date().getFullYear()} ASEGO. Todos los derechos reservados.
-            </p>
-            <div className="flex flex-wrap justify-center gap-8 text-[13px] font-medium text-asego-grey">
-              <a href="#" className="hover:text-asego-blue transition-colors">Políticas de Privacidad</a>
-              <a href="#" className="hover:text-asego-blue transition-colors">Términos de Servicio</a>
-              <a href="#" className="hover:text-asego-blue transition-colors">Seguridad</a>
-              <a href="#" className="hover:text-asego-blue transition-colors">Cookies</a>
-            </div>
-          </div>
+      {/* Footer - Simplified */}
+      <footer className="py-12 bg-white border-t border-slate-100">
+        <div className="max-w-7xl mx-auto px-6 text-center">
+          <p className="text-asego-grey text-sm font-medium">
+            Desarrollado por <span className="text-asego-dark font-bold">Koi Studio</span> gracias a la tecnología de <span className="text-asego-blue font-bold">Notgen</span>
+          </p>
         </div>
       </footer>
     </div>

@@ -56,6 +56,24 @@
       backdrop-filter: blur(12px);
       border: 1px solid rgba(226, 232, 240, 0.8);
     }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0px);
+      }
+
+      50% {
+        transform: translateY(-20px);
+      }
+
+      100% {
+        transform: translateY(0px);
+      }
+    }
+
+    .animate-float {
+      animation: float 6s ease-in-out infinite;
+    }
   </style>
   <script type="importmap">
 {
